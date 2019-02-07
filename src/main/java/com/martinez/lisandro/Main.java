@@ -42,9 +42,7 @@ public class Main {
         }
         int total = solarSystem.calculateAlignments(days);
 
-        String message = makeMessage(days, total);
-
-        System.out.println(message);
+        resultMessage(days, total);
 
     }
 
@@ -69,14 +67,15 @@ public class Main {
         return new CollinearAligner(sun);
     }
 
-    private static String makeMessage(int days, int total) {
+    private static void resultMessage(int days, int total) {
         StringBuilder sb = new StringBuilder();
-        sb.append("The total number of times planets and Sun are aligned in ");
-        sb.append(days);
-        sb.append(" day(s) is = ");
+        sb.append("\n");
+        sb.append("Planets and Sun align ");
         sb.append(total);
-
-        return sb.toString();
+        sb.append(" time(s) in ");
+        sb.append(days);
+        sb.append(" days\n");
+        System.out.println(sb.toString());
     }
 
 }
