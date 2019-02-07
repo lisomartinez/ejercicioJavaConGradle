@@ -1,4 +1,4 @@
-package com.martinez.lisandro.solar;
+package com.martinez.lisandro.solar.aligners;
 
 public class Coordinate {
     private int x;

@@ -1,9 +1,9 @@
 package com.martinez.lisandro.solar;
 
 public interface Aligner {
-    void load(Planet planet);
+    void addToLine(Planet planet);
 
-    void clear();
+    void clearLine();
 
     boolean arePlanetsAligned();
 }

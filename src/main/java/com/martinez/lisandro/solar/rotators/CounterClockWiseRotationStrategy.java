@@ -1,4 +1,4 @@
-package com.martinez.lisandro.solar.rotations;
+package com.martinez.lisandro.solar.rotators;
 
 import com.martinez.lisandro.solar.RotationStrategy;
 

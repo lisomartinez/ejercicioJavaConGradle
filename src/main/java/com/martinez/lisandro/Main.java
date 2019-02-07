@@ -1,16 +1,18 @@
 package com.martinez.lisandro;
 
-import com.martinez.lisandro.solar.*;
+import com.martinez.lisandro.solar.Aligner;
+import com.martinez.lisandro.solar.Planet;
+import com.martinez.lisandro.solar.RotationStrategy;
+import com.martinez.lisandro.solar.SolarSystem;
 import com.martinez.lisandro.solar.aligners.CollinearAligner;
-import com.martinez.lisandro.solar.rotations.ClockWiseRotationStrategy;
-import com.martinez.lisandro.solar.rotations.CounterClockWiseRotationStrategy;
+import com.martinez.lisandro.solar.aligners.Coordinate;
+import com.martinez.lisandro.solar.rotators.ClockWiseRotationStrategy;
+import com.martinez.lisandro.solar.rotators.CounterClockWiseRotationStrategy;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-
-    public static final int DEFAULT_DAYS = 365;
 
     public static final int START_POSITION = 0;
 
@@ -26,17 +28,23 @@ public class Main {
     public static void main(String[] args) {
         SolarSystem solarSystem = makeDefaultSolarSystem();
 
-        int days = args.length > 0 ? Integer.parseInt(args[0]) : DEFAULT_DAYS;
-
+        int days = 0;
+        if (args.length > 0) {
+            try {
+                days = Integer.parseInt(args[0]);
+            } catch (NumberFormatException ex) {
+                System.out.println("Invalid Number");
+                System.exit(1);
+            }
+        } else {
+            System.out.println("The number of days was not entered");
+            System.exit(0);
+        }
         int total = solarSystem.calculateAlignments(days);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("The total number of times all planets and Sun are aligned in ");
-        sb.append(days);
-        sb.append(" day(s) is = ");
-        sb.append(total);
+        String message = makeMessage(days, total);
 
-        System.out.println(sb.toString());
+        System.out.println(message);
 
     }
 
@@ -59,6 +67,16 @@ public class Main {
     private static Aligner createAligner() {
         Coordinate sun = new Coordinate(0, 0);
         return new CollinearAligner(sun);
+    }
+
+    private static String makeMessage(int days, int total) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("The total number of times planets and Sun are aligned in ");
+        sb.append(days);
+        sb.append(" day(s) is = ");
+        sb.append(total);
+
+        return sb.toString();
     }
 
 }

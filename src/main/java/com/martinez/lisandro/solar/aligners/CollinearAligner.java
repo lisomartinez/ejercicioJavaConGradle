@@ -1,7 +1,6 @@
 package com.martinez.lisandro.solar.aligners;
 
 import com.martinez.lisandro.solar.Aligner;
-import com.martinez.lisandro.solar.Coordinate;
 import com.martinez.lisandro.solar.Planet;
 
 import java.util.HashSet;
@@ -17,7 +16,13 @@ public class CollinearAligner implements Aligner {
         this.slopes = new HashSet<>();
     }
 
-    public double getLineFromPlanetToSun(Planet planet) {
+    @Override
+    public void addToLine(Planet planet) {
+        double slope = getSlopeOfLineFromPlanetToSun(planet);
+        slopes.add(slope);
+    }
+
+    private double getSlopeOfLineFromPlanetToSun(Planet planet) {
         double radians = Math.toRadians(planet.getDegrees());
         int x = Math.round((float) (sun.getX() + Math.cos(radians) * planet.getDistanceFromSun()));
         int y = Math.round((float) (sun.getY() + Math.sin(radians) * planet.getDistanceFromSun()));
@@ -29,13 +34,7 @@ public class CollinearAligner implements Aligner {
     }
 
     @Override
-    public void load(Planet planet) {
-        double slope = getLineFromPlanetToSun(planet);
-        slopes.add(slope);
-    }
-
-    @Override
-    public void clear() {
+    public void clearLine() {
         slopes.clear();
     }
 

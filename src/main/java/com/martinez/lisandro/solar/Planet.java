@@ -8,11 +8,18 @@ public class Planet {
     private int degrees;
 
     public Planet(int speed, int degrees, int distanceFromSun, RotationStrategy rotationStrategy) {
-        if (speed < 1) throw new IllegalArgumentException("Speed should be positive");
-        if (degrees < 0 || degrees > 360)
+        if (speed < 1) {
+            throw new IllegalArgumentException("Speed should be positive");
+        }
+        if (degrees < 0 || degrees > 360) {
             throw new IllegalArgumentException("Degree should be greater than 0 and less than or equal to 360");
-        if (distanceFromSun < 0) throw new IllegalArgumentException("Distance should be positive.");
-        if (rotationStrategy == null) throw new IllegalArgumentException("RotationStrategy cannot be null");
+        }
+        if (distanceFromSun < 0) {
+            throw new IllegalArgumentException("Distance should be positive.");
+        }
+        if (rotationStrategy == null) {
+            throw new IllegalArgumentException("RotationStrategy cannot be null");
+        }
 
         this.speed = speed;
         this.degrees = degrees;
@@ -33,16 +40,26 @@ public class Planet {
         Planet planet = (Planet) o;
 
         if (speed != planet.speed) return false;
-        if (getDegrees() != planet.getDegrees()) return false;
-        return getDistanceFromSun() == planet.getDistanceFromSun();
+        if (getDistanceFromSun() != planet.getDistanceFromSun()) return false;
+        return getDegrees() == planet.getDegrees();
     }
 
     @Override
     public int hashCode() {
         int result = speed;
-        result = 31 * result + getDegrees();
         result = 31 * result + getDistanceFromSun();
+        result = 31 * result + getDegrees();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Planet{" +
+                "speed=" + speed +
+                ", distanceFromSun=" + distanceFromSun +
+                ", rotationStrategy=" + rotationStrategy +
+                ", degrees=" + degrees +
+                '}';
     }
 
     public int getDegrees() {
