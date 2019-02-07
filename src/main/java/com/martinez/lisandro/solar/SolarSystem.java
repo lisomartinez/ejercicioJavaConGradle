@@ -7,7 +7,6 @@ public class SolarSystem {
     private static final int FIRST_DAY = 0;
 
     private List<Planet> planets;
-    private boolean planetsAligned;
     private Aligner aligner;
 
     public SolarSystem(List<Planet> planets, Aligner aligner) {
@@ -19,7 +18,6 @@ public class SolarSystem {
     public int calculateAlignments(int days) {
         int total = 0;
         for (int i = FIRST_DAY; i < days; i++) {
-            simulateDay();
             if (arePlanetsAligned()) {
                 total++;
             }
@@ -27,17 +25,14 @@ public class SolarSystem {
         return total;
     }
 
-    public void simulateDay() {
+    private boolean arePlanetsAligned() {
         for (Planet planet : planets) {
             planet.rotate();
-            aligner.load(planet);
+            aligner.addToLine(planet);
         }
-        planetsAligned = aligner.arePlanetsAligned();
-        aligner.clear();
+        boolean result = aligner.arePlanetsAligned();
+        aligner.clearLine();
+        return result;
     }
 
-
-    public boolean arePlanetsAligned() {
-        return planetsAligned;
-    }
 }

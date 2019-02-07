@@ -1,8 +1,6 @@
-package com.martinez.lisandro;
+package com.martinez.lisandro.solar.aligners;
 
-import com.martinez.lisandro.solar.Coordinate;
 import com.martinez.lisandro.solar.Planet;
-import com.martinez.lisandro.solar.aligners.CollinearAligner;
 import com.martinez.lisandro.solar.rotations.ClockWiseRotationStrategy;
 import com.martinez.lisandro.solar.rotations.CounterClockWiseRotationStrategy;
 import org.junit.jupiter.api.AfterEach;
@@ -88,9 +86,9 @@ class CollinearAlignerTest {
         Planet beta = new Planet(3, positions[1], 2000, new ClockWiseRotationStrategy());
         Planet gamma = new Planet(5, positions[2], 1000, new CounterClockWiseRotationStrategy());
 
-        al.load(alpha);
-        al.load(beta);
-        al.load(gamma);
+        al.addToLine(alpha);
+        al.addToLine(beta);
+        al.addToLine(gamma);
 
         boolean result = al.arePlanetsAligned();
 
@@ -104,9 +102,9 @@ class CollinearAlignerTest {
         Planet beta = new Planet(3, positions[1], 2000, new ClockWiseRotationStrategy());
         Planet gamma = new Planet(5, positions[2], 1000, new CounterClockWiseRotationStrategy());
 
-        al.load(alpha);
-        al.load(beta);
-        al.load(gamma);
+        al.addToLine(alpha);
+        al.addToLine(beta);
+        al.addToLine(gamma);
 
         boolean result = al.arePlanetsAligned();
 
@@ -116,6 +114,6 @@ class CollinearAlignerTest {
 
     @AfterEach
     void tearDown() {
-        al.clear();
+        al.clearLine();
     }
 }
